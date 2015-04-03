@@ -18,10 +18,10 @@ describe Application do
     end
 
     it "should create a keyword, only if it doesnt already exists in the db." do
-      Keyword.new(text: "FORd").save;
+      Keyword.new(text: "ford").save;
       fordKey = Keyword.all().first;
 
-      put "/pages", {url: "www.geeksaint.com", keywords: ["Ford", "Car", "Review"] }.to_json;
+      put "/pages", {url: "www.geeksaint.com", keywords: ["ForD", "CaR", "Review"] }.to_json;
       last_response.status.should == 200;
 
       fordKey.id.should == Keyword.where(text: "Ford").first.id;
