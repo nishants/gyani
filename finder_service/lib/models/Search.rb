@@ -12,8 +12,6 @@ class Search
     search_result = {};
     @pages.each { |page|
       weight = @query.weight_of(page)
-      require 'pry';  binding.pry
-
       search_result[weight] = page if(weight > 0)
     }
     search_result.sort_by {|weight, page| weight}.map {|value| value[1]}.reverse
