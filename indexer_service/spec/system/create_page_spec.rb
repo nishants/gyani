@@ -18,7 +18,7 @@ describe Application do
     end
 
     it "should create a keyword, only if it doesnt already exists in the db." do
-      Keyword.new(text: "Ford").save;
+      Keyword.new(text: "FORd").save;
       fordKey = Keyword.all().first;
 
       put "/pages", {url: "www.geeksaint.com", keywords: ["Ford", "Car", "Review"] };
