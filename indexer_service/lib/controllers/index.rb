@@ -1,6 +1,7 @@
 class Application < Sinatra::Base
 
   put "/pages" do
+	params = JSON.parse request.body.read
   	params["keywords"] = create_if_not_exists(params.delete("keywords"));
     Page.new(params).save
   end
