@@ -1,0 +1,16 @@
+development:
+  db:
+    user: "root"
+    password: "mysql"
+    host: "localhost"
+    port: "3306"
+    name: "guggle_test"
+    adapter: "mysql2"
+test:
+  db:
+    user: "root"
+    password: "mysql"
+    host: "localhost"
+    port: "3306"
+    name: "guggle_test"
+    adapter: "mysql2"
