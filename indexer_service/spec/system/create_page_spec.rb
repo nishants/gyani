@@ -9,11 +9,16 @@ describe Application do
 
   context "Add a page" do
     it "should  ok" do
-      put "/pages", {"url" =>"www.geeksaint.com", "keywords"=>["Ford", "Car"]}.to_json ;
+      put "/pages", {"url" =>"www.geeksaint.com", "keywords"=>["Ford", "Car", "Review"]}.to_json ;
       last_response.status.should == 200;
       created_page = Page.all()[0];
       created_page.url.should == "www.geeksaint.com";
-      Keyword.all().length.should == 2;
+      created_page.keywords.should == [
+        Keyword.where(text: "ford").first,
+        Keyword.where(text: "car").first,
+        Keyword.where(text: "review").first
+        ];
+
 
     end
 
