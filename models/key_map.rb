@@ -1,10 +1,15 @@
 # create a model
 class KeyMap < ActiveRecord::Base
-	belongs_to :keyword
-	belongs_to :page
+	has_one :page
+	has_one :keyword
 
 	# keywords must be in order
-	def self.add page, keywrods
-
+	def self.put page, keywords
+		keywords.each_with_index{|keyword, index|
+			KeyMap.create(
+				:page_id => page.id,
+				:keyword_id => keyword.id,
+				:rank => index)
+		}
 	end
 end

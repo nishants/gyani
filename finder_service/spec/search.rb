@@ -17,14 +17,15 @@ describe Application do
     flipkart  = Page.add("www.flipkart.com")
     amazon    = Page.add("www.amazon.com")   
 
-    KeyMap.add(snapdeal, [online, shopping, reviews])
-    KeyMap.add(myntra, [online, clothes, apparels])
-    KeyMap.add(flipkart,[shopping, online, reviews])
-    KeyMap.add(amazon, [online, reviews, shopping])
+    KeyMap.put(snapdeal, [online, shopping, reviews])
+    KeyMap.put(myntra, [online, clothes, apparels])
+    KeyMap.put(flipkart,[shopping, online, reviews])
+    KeyMap.put(amazon, [online, reviews, shopping])
   end
 
   context "Should fetch result by keywords" do
     it "should search based on weight of keywords in query and page." do
+    
       get "/search", :query => "online, shopping"
 
       to_urls(last_response.body).should == [

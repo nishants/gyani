@@ -5,6 +5,7 @@ class Application < Sinatra::Base
     keywords  = keywords_for(params["keywords"])
     page      = Page.add(params["url"])
     create_mapping(page, keywords)
+    status 200
   end
 
   def keywords_for key_texts
@@ -16,6 +17,6 @@ class Application < Sinatra::Base
   end
 
   def create_mapping page, keywords
-    KeyMap.add(page, keywords)
+    KeyMap.put(page, keywords)
   end
 end
