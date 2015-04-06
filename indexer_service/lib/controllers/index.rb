@@ -1,23 +1,21 @@
 class Application < Sinatra::Base
-
+  
   put "/pages" do
-	params = JSON.parse request.body.read
-  	params["keywords"] = create_if_not_exists(params.delete("keywords"));
-    Page.new(params).save
+    params    = JSON.parse(request.body.read)
+    keywords  = keywords_for(params["keywords"])
+    page      = Page.add(params["url"])
+    create_mapping(page, keywords)
   end
 
-  def create_if_not_exists keywords
-  	result = [];
-  	keywords.each{ |key|
-  		key = key.downcase().strip()
-  		keyword = Keyword.where(text: key).first;
-  		unless keyword
-  			keyword = Keyword.new({text: key}) ;
-  			keyword.save;
-  		end
-  		result.push(keyword)
-  	}
-  	return result;
+  def keywords_for key_texts
+    key_texts.map{|key|
+      key     = key.downcase().strip()      
+      keyword = Keyword.find_by_text(key)
+      keyword.nil? ? Keyword.add(key) : keyword
+    }
   end
 
+  def create_mapping page, keywords
+    KeyMap.add(page, keywords)
+  end
 end
