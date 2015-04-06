@@ -7,6 +7,9 @@ require File.expand_path(File.dirname(__FILE__) + '/properties')
 # Include all source code files from root/lib/*
 Dir.glob("./lib/**/*.rb"){|f| require f }
 
+# Include the shared models.
+Dir.glob("../models/**/*.rb"){|f| require f }
+
 def setup_db()
 	db_config = db_config_from_properties(ENV['RACK_ENV']);
   ActiveRecord::Base.establish_connection(
