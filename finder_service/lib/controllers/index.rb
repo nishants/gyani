@@ -6,8 +6,7 @@ class Application < Sinatra::Base
 
   def keywords_from query
     keywords = query.split(",").map{|key| 
-      key =key.downcase().strip()
-      Keyword.find_by_text(key)
+      Keyword.find_by_text(key.downcase().strip())
     }
   end
 end

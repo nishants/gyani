@@ -12,18 +12,19 @@ describe Application do
     clothes     = Keyword.add("clothes")
     apparels    = Keyword.add("apparels")
 
-    @snapdeal_page  = Page.add("www.snapdeal.com")
-    @myntra_page    = Page.add("www.myntra.com")
-    @flipkart_page  = Page.add("www.flipkart.com")
-    @amazon_page    = Page.add("www.amazon.com")    
-  end
+    snapdeal  = Page.add("www.snapdeal.com")
+    myntra    = Page.add("www.myntra.com")
+    flipkart  = Page.add("www.flipkart.com")
+    amazon    = Page.add("www.amazon.com")   
 
-  def to_urls pages_json
-    JSON.parse(pages_json).map {|page| page["url"] }
+    KeyMap.add(snapdeal, [online, shopping, reviews])
+    KeyMap.add(myntra, [online, clothes, apparels])
+    KeyMap.add(flipkart,[shopping, online, reviews])
+    KeyMap.add(amazon, [online, reviews, shopping])
   end
 
   context "Should fetch result by keywords" do
-    it "should return ok" do
+    it "should search based on weight of keywords in query and page." do
       get "/search", :query => "online, shopping"
 
       to_urls(last_response.body).should == [
@@ -33,6 +34,9 @@ describe Application do
         "www.myntra.com"
       ]
     end
-
   end
+
+  def to_urls pages_json
+    JSON.parse(pages_json).map {|page| page["url"] }
+  end  
 end
