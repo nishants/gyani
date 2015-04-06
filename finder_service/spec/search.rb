@@ -6,32 +6,20 @@ describe Application do
     Page.delete_all;
     Keyword.delete_all;
 
-    online      = Keyword.create(text: "online");
-    shopping    = Keyword.create(text: "shopping");
-    reviews     = Keyword.create(text: "reviews");
-    clothes     = Keyword.create(text: "clothes");
-    apparels    = Keyword.create(text: "apparels");
+    online      = Keyword.add("online")
+    shopping    = Keyword.add("shopping")
+    reviews     = Keyword.add("reviews")
+    clothes     = Keyword.add("clothes")
+    apparels    = Keyword.add("apparels")
 
-    @snapdeal_page = Page.create(
-        :url => "www.snapdeal.com",
-        :keywords => [online, shopping, reviews])
-
-    @myntra_page = Page.create(
-        :url => "www.myntra.com",
-        :keywords => [online, clothes, apparels])
-
-    @flipkart_page = Page.create(
-        :url => "www.flipkart.com",
-        :keywords => [shopping, online, reviews])
-
-    @amazon_page = Page.create(
-        :url => "www.amazon.com",
-        :keywords => [online, reviews, shopping])
+    @snapdeal_page  = Page.add("www.snapdeal.com")
+    @myntra_page    = Page.add("www.myntra.com")
+    @flipkart_page  = Page.add("www.flipkart.com")
+    @amazon_page    = Page.add("www.amazon.com")    
   end
 
   def to_urls pages_json
-    urls = (JSON.parse pages_json).map {|page| page["url"] }
-    urls
+    JSON.parse(pages_json).map {|page| page["url"] }
   end
 
   context "Should fetch result by keywords" do
@@ -42,7 +30,8 @@ describe Application do
         "www.snapdeal.com",
         "www.flipkart.com",
         "www.amazon.com",
-        "www.myntra.com"]
+        "www.myntra.com"
+      ]
     end
 
   end
