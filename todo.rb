@@ -13,6 +13,8 @@ TODO
 13. change the test for indexer_service#create_page_spec(only rest, okay for existing, created for new)
 	also return craeted page in response.
 14. write integration tests.
+15. something is fishy, why KeyMap.put is put on singular ??
+16. move search models to finder_api
 
 Done
 1. separate out model as gem.
