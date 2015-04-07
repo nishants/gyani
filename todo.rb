@@ -1,7 +1,7 @@
 TODO
+0. why to consider max weight at all.
 2. create a client.
 3. create search by keywords.
-4. correct the page creation, with using the KeywordsPage.
 5. remove all semicolons
 6. separate settings for test and development.
 7. create migrations.
@@ -18,6 +18,7 @@ TODO
 
 Done
 1. separate out model as gem.
+4. correct the page creation, with using the KeywordsPage.
 
 
 Issues :

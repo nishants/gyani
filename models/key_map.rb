@@ -13,8 +13,7 @@ class KeyMap < ActiveRecord::Base
 		}
 	end
 
-	def self.mappings_for keywords
-		keyword_ids = keywords.map{|keyword| keyword.id}
-		KeyMap.where(:keyword_id => keyword_ids)
+	def self.mappings_for keywords_ids
+		KeyMap.where(:keyword_id => keywords_ids)
 	end	
 end
