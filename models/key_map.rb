@@ -12,4 +12,9 @@ class KeyMap < ActiveRecord::Base
 				:rank => index)
 		}
 	end
+
+	def self.mappings_for keywords
+		keyword_ids = keywords.map{|keyword| keyword.id}
+		KeyMap.where(:keyword_id => keyword_ids)
+	end	
 end
