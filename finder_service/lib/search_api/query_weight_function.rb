@@ -14,10 +14,9 @@ class QueryWeightFunction
   end
 
   def apply_on page_indices
-    sorted_page_indices = page_indices.sort{|page_index_one, page_index_two|
+    page_indices.sort{|page_index_one, page_index_two|
       search_weight_of(page_index_two) <=> search_weight_of(page_index_one)
     }
-    sorted_page_indices
   end
 
   def search_weight_of page_index

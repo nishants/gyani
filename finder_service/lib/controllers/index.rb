@@ -1,7 +1,7 @@
 class Application < Sinatra::Base
 
   get "/search" do
-    PageSearch.search_pages_with(keywords_from(params["query"])).to_json
+    Search.search_for(keywords_from(params["query"])).to_json
   end
 
   def keywords_from query
