@@ -1,4 +1,6 @@
 class PageIndex
+  attr_accessor :page_id
+
 	def self.indexes_containing keywords
     indexes = KeyMap.mappings_for(keywords)
     page_wise_indexes = group_by_page(indexes)
@@ -29,4 +31,11 @@ class PageIndex
   def index_of keyword
     @keyword_ids[keyword.id]
   end
+
+  def self.to_pages page_indices
+    page_ids = page_indices.map{|page_index|
+      Page.find_by_id(page_index.page_id) 
+    }
+    
+  end  
 end

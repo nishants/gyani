@@ -8,45 +8,32 @@ class QueryWeightFunction
     @max_keys = max_keys    
   end
 
-  def apply_on query, pages
-    query_weights         = weigh(query)
-    page_key_weight_map   = weigths_on_page(pages)
-    to_key_ids(page_key_weight_map)
-  end  
-
-  def sort_by_weight_against_query page_key_weight_map, query_weights
-    page_key_weight_map.sort_by{|page_id, page_key_weights|
-      weight_of(query_weights, page_key_weights)
-    }
+  def for keywords_in_query
+    @keywords_in_query = keywords_in_query
+    self
   end
 
-  def weigths_on_page key_ids_on_pages
-    key_ids_on_pages.each{|key, key_ids|
-      key_ids_on_pages[key] = weigh(key_ids)
+  def apply_on page_indices
+    sorted_page_indices = page_indices.sort{|page_index_one, page_index_two|
+      search_weight_of(page_index_two) <=> search_weight_of(page_index_one)
     }
+    sorted_page_indices
   end
 
-  def weigh key_ids
-    weights = {}
-    key_ids.each_with_index{|key_id, index|
-      weights[key_id] = @max_keys - index
-    }    
-    return weights
-  end
-
-  def to_key_ids key_ids_and_keys_arr
-    key_ids_and_keys_arr.map{|key_arr|
-      key_arr.first
-    }
-  end  
-
-  def weight_of query_key_weights, page_key_weights
+  def search_weight_of page_index
     result = 0
-    query_key_weights.each{|key, weight|
-      weight_in_page = page_key_weights[key]
-      weight_in_page = 0 if weight_in_page.nil?
-      result += (weight_in_page * weight)
+    @keywords_in_query.each{|key|
+      result += (weight_in_query(key) * weight_on_page(key, page_index))
     }
     result
-  end	
+  end
+
+  def weight_in_query key
+    @max_keys - @keywords_in_query.index(key)
+  end
+
+  def weight_on_page key, page_index
+    index_on_page = page_index.index_of(key)
+    index_on_page.nil? ? 0 : (@max_keys - index_on_page)
+  end
 end
