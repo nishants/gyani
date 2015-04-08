@@ -22,7 +22,7 @@ Done
 16. move search models to finder_api
 
 ------------------------
-pageIndices = PageIndex.for(keywords)
+pageIndices = PageIndex.with_one_or_more_of(keywords)
 pages = PageIndex.to_pages(pageIndices)
 
 key_index_on_page 	= pageIndex.index_of(key)
@@ -30,12 +30,12 @@ query
 
 def apply_on query,  pageIndices
 	sortedPageIndices = pageIndices.sort{|pageIndex|
-		weight_of_page(query,  pageIndex)
+		search_weight(query,  pageIndex)
 	}
 	PageIndex.to_pages(sortedPageIndices)
 end
 
-def weight_of_page query, pageIndex
+def search_weight query, pageIndex
 	result = 0
 	query.each{|key|
 		result += (weight_for(key, query, pageIndex))
