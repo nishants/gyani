@@ -7,7 +7,7 @@ describe Application do
     it "Should return page indexes for keywords" do
       Page.delete_all;
       Keyword.delete_all;
-      KeyMap.delete_all;
+      Index.delete_all;
 
 	    online      = Keyword.add("online")
 	    shopping    = Keyword.add("shopping")
@@ -21,10 +21,10 @@ describe Application do
 	    flipkart  = Page.add("www.flipkart.com")
 	    amazon    = Page.add("www.amazon.com")   
 
-	    KeyMap.put( snapdeal,  [online,   shopping	    ])
-	    KeyMap.put( flipkart,  [shopping, online	      ])
-	    KeyMap.put( myntra,    [online			            ])
-	    KeyMap.put( amazon,    [clothing,india,apparels ])
+	    Index.put( snapdeal,  [online,   shopping	    ])
+	    Index.put( flipkart,  [shopping, online	      ])
+	    Index.put( myntra,    [online			            ])
+	    Index.put( amazon,    [clothing,india,apparels ])
 
       PageIndex.indexes_containing([shopping, online]).length.should == 3
       PageIndex.indexes_containing([shopping]).length.should == 2
