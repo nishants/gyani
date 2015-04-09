@@ -17,6 +17,6 @@ class Application < Sinatra::Base
   end
 
   def create_mapping page, keywords
-    KeyMap.put(page, keywords)
+    Index.put(page, keywords)
   end
 end
