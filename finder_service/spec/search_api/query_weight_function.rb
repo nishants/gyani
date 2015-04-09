@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Application do
 
-  context "Should sort pages by weight of query" do
+  context "Query Weight Function" do
     
     it "Should sort page_ids by strenght of match" do
       Page.delete_all;

@@ -24,7 +24,7 @@ describe Application do
     KeyMap.put(amazon, [online, reviews, shopping])
   end
 
-  context "Should fetch result by keywords" do
+  context "Search Controller" do
     it "should search based on weight of keywords in query and page." do
     
       get "/search", :query => "online, shopping"

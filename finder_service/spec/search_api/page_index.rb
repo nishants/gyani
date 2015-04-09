@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Application do
 
-  context "Get page indexes for keywords" do
+  context "Page Index" do
     
     it "Should return page indexes for keywords" do
       Page.delete_all;
