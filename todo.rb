@@ -14,12 +14,14 @@ TODO
 	also return craeted page in response.
 14. write integration tests.
 15. something is fishy, why KeyMap.put is put on singular ?? -> should be Index.add rather
+16 correct KeyMap - use page and key instead of ids
 
 Done
 1. separate out model as gem.
 4. correct the page creation, with using the KeywordsPage.
 12. rename key_maps table to key_map
 16. move search models to finder_api
+17. correct name of tests in describe blocks
 
 ------------------------
 pageIndices = PageIndex.with_one_or_more_of(keywords)
@@ -62,17 +64,32 @@ Issues :
  ENV['RACK_ENV'] = 'development'
  require './config/setup'
 
- page = Page.new(:url => 'geeksaints.org');
+ page = Page.create(:url => 'geeksaints.org');
  key = Keyword.create(:text => 'vision');
- page.keywords.push(key);
- page.save()
- 
+ KeyMap.put(page, [key]) 
+
  //KeywordsPage
 
 Create a page like : 
 	page = Page.create(:url => 'www.snapdeal.com')
 	key = Keyword.create(:text => 'online')
 	KeywordsPage.create(:page_id => page.id, :keyword_id => key.id, :rank => 3)
+
+
+Page.find_by_id(page_index.page_id)
+result
+
+page_indices.each{|page_index|
+	url = Page.find_by_id(page_index.page_id).url
+	weight = search_weight_of(page_index)
+	puts("#{url} : #{weight}")
+}
+
+sorted_page_indices.each{|page_index|
+	url = Page.find_by_id(page_index.page_id).url
+	weight = search_weight_of(page_index)
+	puts("#{url} : #{weight}")
+}
 
 
 

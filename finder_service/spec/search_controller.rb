@@ -5,7 +5,7 @@ describe Application do
   before :each do
     Page.delete_all;
     Keyword.delete_all;
-    KeyMap.delete_all;
+    Index.delete_all;
 
     online      = Keyword.add("online")
     shopping    = Keyword.add("shopping")
@@ -18,10 +18,10 @@ describe Application do
     flipkart  = Page.add("www.flipkart.com")
     amazon    = Page.add("www.amazon.com")   
 
-    KeyMap.put(snapdeal, [online, shopping, reviews])
-    KeyMap.put(myntra, [online, clothes, apparels])
-    KeyMap.put(flipkart,[shopping, online, reviews])
-    KeyMap.put(amazon, [online, reviews, shopping])
+    Index.put(snapdeal, [online, shopping, reviews])
+    Index.put(myntra, [online, clothes, apparels])
+    Index.put(flipkart,[shopping, online, reviews])
+    Index.put(amazon, [online, reviews, shopping])
   end
 
   context "Search Controller" do
